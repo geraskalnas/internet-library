@@ -8,6 +8,7 @@ class l_book{
   private $year  = "";
   //2.Functions
   //2.1.Meta
+  //2.1.1.Get
   function get_name(){
     echo $this->name;
   }
@@ -17,6 +18,7 @@ class l_book{
   function get_year(){
     echo $this->year;
   }
+  //2.1.2.Set
   function set_name($value){
     $this->name=$value;
   }
@@ -25,6 +27,10 @@ class l_book{
   }
   function set_year($value){
     $this->year=$value;
+  }
+  //2.2.Control
+  function commit(){
+    
   }
 }
 $l= new l_book();
