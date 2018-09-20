@@ -11,6 +11,7 @@ class l_book{
   private $name  = "boom";
   private $author= "";
   private $year  = "";
+  public $db="";
   //2.Functions
   //2.1.Meta
   //2.1.1.Get
@@ -35,7 +36,12 @@ class l_book{
   }
   //2.2.Control
   function commit(){
-    
+    $sql = <<<SQL
+    INSERT VALUES (1, $this->name, $this->author, $this->year)
+    SQL;
+    if(!$result = $db->query($sql)){
+      die('There was an error running the query [' . $db->error . ']');
+    }
   }
 }
 $l= new l_book();
@@ -43,4 +49,5 @@ $l= new l_book();
 //echo $l->name;
 $l->set_name("asdaA");
 $l->get_name();
+$l->commit();
 ?>
