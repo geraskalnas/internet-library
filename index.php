@@ -1,5 +1,7 @@
 <?php
-//phpinfo();
+
+$db = new mysqli('localhost', 'lib_user', 'datalog15', 'librarys_system11');
+
 class l_book{
   //1.Variables
   //1.1.Meta
