@@ -11,7 +11,7 @@ class l_book{
   private $name  = "boom";
   private $author= "";
   private $year  = "";
-  public $db="";
+  /////////public $db;
   //2.Functions
   //2.1.Meta
   //2.1.1.Get
