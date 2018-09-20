@@ -36,9 +36,7 @@ class l_book{
   }
   //2.2.Control
   function commit(){
-    $sql = <<<SQL
-    INSERT VALUES (1, $this->name, $this->author, $this->year)
-    SQL;
+    $sql = "INSERT VALUES (1, $this->name, $this->author, $this->year)";
     if(!$result = $db->query($sql)){
       die('There was an error running the query [' . $db->error . ']');
     }
