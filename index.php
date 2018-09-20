@@ -1,6 +1,9 @@
 <?php
 
 $db = new mysqli('localhost', 'lib_user', 'datalog15', 'librarys_system11');
+if($db->connect_errno > 0){
+    die('Unable to connect to database [' . $db->connect_error . ']');
+}
 
 class l_book{
   //1.Variables
