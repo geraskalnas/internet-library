@@ -38,7 +38,7 @@ class l_book{
   }
   //2.2.Control
   function commit(){
-    $sql = "INSERT INTO books VALUES (1, 'asddddddd', 'man', 2018);";
+    $sql = "INSERT INTO books (name, author, year)  VALUES ('asddddddd', 'man', '2018');";
     return $sql;
   }
 }
