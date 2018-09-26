@@ -1,9 +1,11 @@
 <?php
 
 $db = new mysqli('db4free.net', 'lib_user', 'datalog15', 'library_system11');
+ 
 if($db->connect_errno > 0){
     die('Unable to connect to database [' . $db->connect_error . ']');
 }
+
 
 class l_book{
   //1.Variables
@@ -36,17 +38,21 @@ class l_book{
   }
   //2.2.Control
   function commit(){
-    $sql = "INSERT VALUES (1, $this->name, $this->author, $this->year)";
-    if(!$result = $db->query($sql)){
-      die('There was an error running the query [' . $db->error . ']');
-    }
+    $sql = "INSERT INTO books VALUES (1, 'asddddddd', 'man', 2018);";
+    return $sql;
   }
 }
 $l= new l_book();
-$l->$db=$db;
+//$l->$db=$db;
 //$l->name="da";
 //echo $l->name;
 $l->set_name("asdaA");
 $l->get_name();
-$l->commit();
+$asd=$l->commit();
+if(!$result = $db->query($asd)){
+      die('There was an error running the query [' . $db->error . ']');
+}
+//while($row = $result->fetch_assoc()){
+//    echo $row['name'] . '<br />';
+//}
 ?>
