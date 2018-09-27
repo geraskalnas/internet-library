@@ -10,10 +10,11 @@ if($db->connect_errno > 0){
 class l_book{
   //1.Variables
   //1.1.Meta
-  private $name  = "boom";
+  private $name  = "";
   private $author= "";
   private $year  = "";
-  /////////public $db;
+  private $inDB=false;
+  public $db;
   //2.Functions
   //2.1.Meta
   //2.1.1.Get
@@ -38,8 +39,10 @@ class l_book{
   }
   //2.2.Control
   function commit(){
-    $sql = "INSERT INTO books (name, author, year)  VALUES ('asddddddd', 'man', '2018');";
-    return $sql;
+    $sql = $this->inDB?"UPDATE books SET ":"INSERT INTO books (name, author, year)  VALUES ('asddddddd', 'man', '2018');";
+    if(!$result = $this->db->query($sql)){
+      die('There was an error running the query [' . $db->error . ']');
+    }
   }
 }
 $l= new l_book();
@@ -48,10 +51,10 @@ $l= new l_book();
 //echo $l->name;
 $l->set_name("asdaA");
 $l->get_name();
-$asd=$l->commit();
-if(!$result = $db->query($asd)){
-      die('There was an error running the query [' . $db->error . ']');
-}
+$l->commit();
+//if(!$result = $db->query($asd)){
+//      die('There was an error running the query [' . $db->error . ']');
+//}
 //while($row = $result->fetch_assoc()){
 //    echo $row['name'] . '<br />';
 //}
