@@ -6,7 +6,6 @@ if($db->connect_errno > 0){
     die('Unable to connect to database [' . $db->connect_error . ']');
 }
 
-
 class l_book{
   //1.Variables
   //1.1.Meta
@@ -54,7 +53,6 @@ class l_book{
   }
 }
 $l= new l_book();
-
 $l->$db=$db;
 
 $l->set_name("asdaA");
@@ -65,3 +63,27 @@ $l->commit();
 //    echo $row['name'] . '<br />';
 //}
 ?>
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Library system</title>  
+  <link rel="stylesheet" href="css/style.css">  
+</head>
+<body>
+  <div class="wrapper">
+  <div class="sidebar">
+
+  </div>
+  <div class="main">
+
+  </div>
+
+  <div class="sidebar">
+
+  </div>
+</div>
+</body>
+</html>
