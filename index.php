@@ -13,7 +13,7 @@ class l_book{
   private $author= "";
   private $year  = "";
   private $inDB=false;
-  public $db = new mysqli('db4free.net', 'lib_user', 'datalog15', 'library_system11');
+  public $db = false;
   //2.Functions
   //2.1.Meta
   //2.1.1.Get
@@ -36,6 +36,9 @@ class l_book{
   function set_year($value){
     $this->year=$value;
   }
+  function set_db(&$value){
+    $this->db=$value;
+  }
   //2.2.Control
   function rreset($fdb=false){
     $this->name  = "";
@@ -52,7 +55,7 @@ class l_book{
   }
 }
 $l= new l_book();
-//$l->$db=$db;
+$l->set_db=$db;
 
 $l->set_name("asdaA");
 $l->get_name();
