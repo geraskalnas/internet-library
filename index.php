@@ -58,7 +58,7 @@ $l= new l_book();
 $l->set_db($db);
 
 $l->set_name("asdaA");
-$l->get_name();
+
 $l->commit();
 
 //while($row = $result->fetch_assoc()){
@@ -80,7 +80,7 @@ $l->commit();
 
   </div>
   <div class="main">
-
+<?php  $l->get_name(); ?>
   </div>
 
   <div class="sidebar">
