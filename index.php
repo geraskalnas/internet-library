@@ -13,7 +13,7 @@ class l_book{
   private $author= "";
   private $year  = "";
   private $inDB=false;
-  public $db;
+  public $db = new mysqli('db4free.net', 'lib_user', 'datalog15', 'library_system11');
   //2.Functions
   //2.1.Meta
   //2.1.1.Get
@@ -37,13 +37,12 @@ class l_book{
     $this->year=$value;
   }
   //2.2.Control
-  function reset(){
-    private $name  = "";
-    private $author= "";
-    private $year  = "";
-    private $inDB=false;
-    public $db;
-  
+  function rreset($fdb=false){
+    $this->name  = "";
+    $this->author= "";
+    $this->year  = "";
+    $this->inDB=false;
+    if($fdb){$this->db;}
   }
   function commit(){
     $sql = $this->inDB?"UPDATE books SET ":"INSERT INTO books (name, author, year)  VALUES ('asddddddd', 'man', '2018');";
@@ -53,7 +52,7 @@ class l_book{
   }
 }
 $l= new l_book();
-$l->$db=$db;
+//$l->$db=$db;
 
 $l->set_name("asdaA");
 $l->get_name();
