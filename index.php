@@ -52,14 +52,17 @@ class l_book{
     if(!$result = $this->db->query($sql)){
       die('There was an error running the query [' . $db->error . ']');
     }
+    return $sql;
   }
 }
 $l= new l_book();
 $l->set_db($db);
 
 $l->set_name("Math book");
+$l->set_author("Iam");
+$l->set_year("2018");
 
-$l->commit();
+$sql=$l->commit();
 
 //while($row = $result->fetch_assoc()){
 //    echo $row['name'] . '<br />';
@@ -80,7 +83,10 @@ $l->commit();
 
   </div>
   <div class="main">
-<?php  echo $l->get_name(); ?>
+    <?php  echo $l->get_name();?>
+    <br>
+    <?php echo $sql;;?>
+
   </div>
 
   <div class="sidebar">
