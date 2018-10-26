@@ -48,7 +48,7 @@ class l_book{
     if($fdb){$this->db;}
   }
   function commit(){
-    $sql = $this->inDB?"UPDATE books SET ":"INSERT INTO books (name, author, year)  VALUES ('" . get_name() . "', '" . get_author() . "', '" . get_year() . "');";
+    $sql = $this->inDB?"UPDATE books SET ":"INSERT INTO books (name, author, year)  VALUES ('" . $this->get_name() . "', '" . $this->get_author() . "', '" . $this->get_year() . "');";
     if(!$result = $this->db->query($sql)){
       die('There was an error running the query [' . $db->error . ']');
     }
