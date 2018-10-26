@@ -9,11 +9,11 @@ if($db->connect_errno > 0){
 class l_book{
   //1.Variables
   //1.1.Meta
-  private $name  = "";
-  private $author= "";
-  private $year  = "";
+  public $name  = "";
+  public $author= "";
+  public $year  = "";
   private $inDB=false;
-  public $db = false;
+  private $db = false;
   //2.Functions
   //2.1.Meta
   //2.1.1.Get
