@@ -18,13 +18,13 @@ class l_book{
   //2.1.Meta
   //2.1.1.Get
   function get_name(){
-    echo $this->name;
+    return $this->name;
   }
   function get_author(){
-    echo $this->author;
+    return $this->author;
   }
   function get_year(){
-    echo $this->year;
+    return $this->year;
   }
   //2.1.2.Set
   function set_name($value){
@@ -80,7 +80,7 @@ $l->commit();
 
   </div>
   <div class="main">
-<?php  $l->get_name(); ?>
+<?php  echo $l->get_name(); ?>
   </div>
 
   <div class="sidebar">
