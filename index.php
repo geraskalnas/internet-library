@@ -23,7 +23,7 @@ class l_book
     function get_id()
     {
         if ($id == 0) {
-            $sql = "SELECT id FROM books;";
+            $sql = $inDB?"SELECT MAX(id) FROM books;":"SELECT MAX(id)+1 FROM books;";
             if (!$result = $this->db->query($sql)) {
                 die('There was an error running the query [' . $this->db->error . ']');
             }
@@ -90,12 +90,12 @@ class l_book
     }
     function load($id)
     {
-        $sql = "SELECT id, name, author, year, imgPath FROM books WHERE id='" . $id . "';";
+        $sql = "SELECT name, author, year, imgPath FROM books WHERE id='" . $id . "';";
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
         }
         $row = $result->fetch_assoc();
-        $this->id=$row["id"];
+        $this->id=$id;
         $this->set_name($row['name']);
         $this->set_author($row['author']);
         $this->set_year($row['year']);
