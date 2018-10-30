@@ -25,7 +25,7 @@ class l_book
         if ($id == 0) {
             $sql = "SELECT id FROM books;";
             if (!$result = $this->db->query($sql)) {
-                die('There was an error running the query [' . $db->error . ']');
+                die('There was an error running the query [' . $this->db->error . ']');
             }
             $this->id=$result->fetch_assoc()["id"];
         }
@@ -83,8 +83,8 @@ class l_book
     function commit()
     {
         $sql = $this->inDB ? "UPDATE books SET " : "INSERT INTO books (name, author, year, registredIn)  VALUES ('" . $this->get_name() . "', '" . $this->get_author() . "', '" . $this->get_year() . "', CURDATE());";
-        if (!$result = $this->db->query($sql)) {
-            die('There was an error running the query [' . $db->error . ']');
+        if (!$result = $db->query($sql)) {
+            die('There was an error running the query [' . $this->db->error . ']');
         }
         return $sql;
     }
@@ -92,7 +92,7 @@ class l_book
     {
         $sql = "SELECT id, name, author, year, imgPath FROM books WHERE id='" . $id . "';";
         if (!$result = $this->db->query($sql)) {
-            die('There was an error running the query [' . $db->error . ']');
+            die('There was an error running the query [' . $this->db->error . ']');
         }
         $row = $result->fetch_assoc();
         $this->id=$row["id"];
@@ -118,6 +118,8 @@ $autorius    = $l->get_author();
 $pavadinimas = $l->get_name();
 $imgPath     = $l->get_imgPath();
 
+echo "";
+    //echo "<img src='" . $imgPath . "'style='width: 100%;height: auto;'>";
 
 ?>
 
@@ -132,16 +134,21 @@ $imgPath     = $l->get_imgPath();
 <body>
   <div class="wrapper">
   <div class="sidebar">
-
+    <p>Paskutinės 10:</p><br>
+    <?php
+    $sql = "SELECT name, author FROM books ORDER BY id desc LIMIT 10;";
+    if (!$result = $db->query($sql)) {
+        die('There was an error running the query [' . $db->error . ']');
+    }
+    while ($row = $result->fetch_assoc()){
+        echo $row["author"] . " „" . $row["name"] . "“<br><br>";
+    }
+    ?>
   </div>
   <div class="main">
-    <?php
-echo $autorius . " „" . $pavadinimas . "“";
-?>
+    <?php echo $autorius . " „" . $pavadinimas . "“"; ?>
    <br>
-    <?php
-echo "<img src='" . $imgPath . "'>";
-?>
+    
 
   </div>
 
