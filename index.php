@@ -82,6 +82,7 @@ class l_book
     }
     function commit()
     {
+        $this->get_id();
         $sql = $this->inDB ? "UPDATE books SET " : "INSERT INTO books (name, author, year, registredIn)  VALUES ('" . $this->get_name() . "', '" . $this->get_author() . "', '" . $this->get_year() . "', CURDATE());";
         if (!$result = $db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
@@ -113,7 +114,7 @@ $l->set_db($db);
 
 //$sql=$l->commit();
 
-$l->load(1);
+$l->load(2);
 $autorius    = $l->get_author();
 $pavadinimas = $l->get_name();
 $imgPath     = $l->get_imgPath();
