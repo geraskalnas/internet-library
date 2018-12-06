@@ -77,7 +77,7 @@
             //$out=$result->fetch_assoc()["name"];
         
             echo $out." logged.";
-        }else echo "Wong information.";
+        }else echo "Wrong information.";
   }
 ?>
 </body>
