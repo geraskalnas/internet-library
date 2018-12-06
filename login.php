@@ -34,29 +34,33 @@
  
         return $ipaddress;
     }
-      $db = new mysqli('db4free.net', 'lib_user', 'datalog15', 'library_system11');
-        
+      //$db = new mysqli('db4free.net', 'lib_user', 'datalog15', 'library_system11');
+        $db = new mysqli('localhost', 'id4519783_user2', '11Asilamsne', 'id4519783_lib_books');
+    
         if ($db->connect_errno > 0) {
             die('Unable to connect to database [' . $db->connect_error . ']');
         }
-        $sql = "SELECT name FROM users WHERE name='".$_POST["name"]."' AND hash='".md5($_POST["password"])."';";
+        $sql = "SELECT name, id FROM users WHERE name='".$_POST["name"]."' AND hash='".md5($_POST["password"])."';";
         if (!$result = $db->query($sql)) {
             die('There was an error running the query [' . $db->error . ']');
         }
-        $out=$result->fetch_assoc()["name"];
+        $out=$result->fetch_assoc();
+        $id=$out["id"];
+        $out=$out["name"];
         
         if(!empty($out)){
             if ($db->connect_errno > 0) {
                 die('Unable to connect to database [' . $db->connect_error . ']');
             }
-            $sql = "INSERT (id, date, time) FROM ls WHERE uid='".$id."'])."';";
+            $sql = "INSERT INTO lr (uid, dat, tim, ip) VALUES(".$id.", CURRENT_DATE(), CURRENT_TIME(), '".getIP()."')";
+            //echo $sql;
             if (!$result = $db->query($sql)) {
                 die('There was an error running the query [' . $db->error . ']');
             }
             //$out=$result->fetch_assoc()["name"];
         
             echo $out." logged.";
-        }else echo "rip";
+        }else echo "Information incorrect.";
   }
 ?>
 </body>
