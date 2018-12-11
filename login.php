@@ -31,7 +31,7 @@
     die('Unable to connect to database [' . $db->connect_error . ']');
   }
   
-  $sql="SELECT uid FROM lr WHERE tim > CURRENT_TIME() - INTERVAL 60 MINUTE AND DAT=CURRENT_DATE() AND ip='".getIP()."';";
+  $sql="SELECT uid FROM lr WHERE tim > CURRENT_TIME() - INTERVAL 60 MINUTE AND DAT=CURRENT_DATE() AND ip='".@getIP()."';";
   if (!$result = $db->query($sql)) {
     die('There was an error running the query [' . $db->error . ']');
   }
@@ -71,7 +71,7 @@
             if ($db->connect_errno > 0) {
                 die('Unable to connect to database [' . $db->connect_error . ']');
             }
-            $sql = "INSERT INTO lr (uid, dat, tim, ip) VALUES(".$id.", CURRENT_DATE(), CURRENT_TIME(), '".getIP()."')";
+            $sql = "INSERT INTO lr (uid, dat, tim, ip) VALUES(".$id.", CURRENT_DATE(), CURRENT_TIME(), '".@getIP()."')";
             //echo $sql;
             if (!$result = $db->query($sql)) {
                 die('There was an error running the query [' . $db->error . ']');
