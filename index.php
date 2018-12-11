@@ -135,10 +135,8 @@ echo "";
 </head>
 <body>
   <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <a class="active" href="/">Prad=ia</a>
+    <a href="login.php">Prisijungti</a>
   </div>
   <div class="wrapper">
    
