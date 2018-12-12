@@ -15,12 +15,14 @@ class l_book
     //2.1.1.Get
     function get_id()
     {
-        if ($id == 0) {
-            $sql = $inDB?"SELECT MAX(id) FROM books;":"SELECT MAX(id)+1 FROM books;";
+        if ($this->inDB == false) {
+            $sql = "SELECT MAX(id)+1 FROM books;";
+            echo $sql;
             if (!$result = $this->db->query($sql)) {
                 die('There was an error running the query [' . $this->db->error . ']');
             }
-            $this->id=$result->fetch_assoc()["id"];
+            $this->inDB=true;
+            @$this->id=$result->fetch_assoc()["MAX(id)+1"];
         }
         return $this->id;
         
@@ -106,11 +108,42 @@ class l_user
     //1.1.Meta
     private $id = 0;
     private $name = "";
-    private $author = "";
-    private $year = "";
-    private $imgPath = "";
+    private $hash = "";
     private $inDB = false;
     private $db = false;
+    
+    function get_id()
+    {
+        if ($id == 0) {
+            $sql = $inDB?"SELECT id FROM users WHERE name = ".$this->get_name()." AND hash = ".$this->get_hash().";":"SELECT MAX(id)+1 FROM users;";
+            if (!$result = $this->db->query($sql)) {
+                die('There was an error running the query [' . $this->db->error . ']');
+            }
+            $this->id=$result->fetch_assoc()["id"];
+        }
+        return $this->id;
+        
+    }
+    
+    
   
+}
+
+if(isset($_GET["test"]) && $_GET["test"]=="1"){
+    require_once("config.php");
+    echo "start\n";
+    if ($db->connect_errno > 0) {
+        die('Unable to connect to database [' . $db->connect_error . ']');
+    }
+    
+    $l = new l_book();
+    $l->set_db($db);
+    
+    $l->load(1);
+    echo $l->get_name()."\n";
+    $l->rreset(false);
+    
+    $l->set_name("asda");
+    echo $l->get_id();
 }
 ?>
