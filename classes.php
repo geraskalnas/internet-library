@@ -21,11 +21,9 @@ class l_book
             if (!$result = $this->db->query($sql)) {
                 die('There was an error running the query [' . $this->db->error . ']');
             }
-            $this->inDB=true;
             @$this->id=$result->fetch_assoc()["MAX(id)+1"];
         }
         return $this->id;
-        
     }
     function get_name()
     {
@@ -114,19 +112,64 @@ class l_user
     
     function get_id()
     {
-        if ($id == 0) {
-            $sql = $inDB?"SELECT id FROM users WHERE name = ".$this->get_name()." AND hash = ".$this->get_hash().";":"SELECT MAX(id)+1 FROM users;";
+        if ($this->inDB == false) {
+            $sql = "SELECT MAX(id)+1 FROM users;";
+            echo $sql;
             if (!$result = $this->db->query($sql)) {
                 die('There was an error running the query [' . $this->db->error . ']');
             }
-            $this->id=$result->fetch_assoc()["id"];
+            @$this->id=$result->fetch_assoc()["MAX(id)+1"];
         }
         return $this->id;
-        
     }
-    
-    
-  
+    function get_name(){
+        return $this->name;
+    }
+    function get_hash(){
+        return $this->hash;
+    }
+    function set_name($value)
+    {
+        $this->name = $value;
+    }
+    function set_hash($value)
+    {
+        $this->hash = $value;
+    }
+    function set_db(&$value)
+    {
+        $this->db = $value;
+    }
+    function rreset($fdb = true)
+    {
+        $this->id=0;
+        $this->set_name("");
+        $this->set_hash("");
+        $this->inDB = false;
+        if($fdb){$this->db=false;}
+    }
+    function commit()
+    {
+        $this->get_id();
+        $sql = $this->inDB ? "UPDATE users SET name = '".$this->get_name()."', hash = '".$this->get_hash()."';" : "INSERT INTO users (name, hash, registredIn)  VALUES ('" . $this->get_name() . "', '" . $this->get_hash() . "', CURDATE());";
+        if (!$result = $this->db->query($sql)) {
+            die('There was an error running the query [' . $this->db->error . ']');
+        }
+        return $sql;
+    }
+    function load($id)
+    {
+        $sql = "SELECT name, hash FROM users WHERE id='" . $id . "';";
+        if (!$result = $this->db->query($sql)) {
+            die('There was an error running the query [' . $this->db->error . ']');
+        }
+        $row = $result->fetch_assoc();
+        $this->id=$id;
+        $this->set_name($row['name']);
+        $this->set_hash($row['hash']);
+        $this->inDB=true;
+        return $sql;
+    }  
 }
 
 if(isset($_GET["test"]) && $_GET["test"]=="1"){
@@ -136,14 +179,12 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
         die('Unable to connect to database [' . $db->connect_error . ']');
     }
     
-    $l = new l_book();
+    $l = new l_user;
     $l->set_db($db);
-    
-    $l->load(1);
-    echo $l->get_name()."\n";
-    $l->rreset(false);
-    
     $l->set_name("asda");
-    echo $l->get_id();
+    $l->set_hash("7815696ecbf1c96e6894b779456d330e");
+    $l->commit();
+    //echo $l->get_name()."\n";
+    //echo $l->get_hash()."\n";
 }
 ?>

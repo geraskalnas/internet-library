@@ -1,0 +1,15 @@
+auto increment manipulation:
+  SELECT `AUTO_INCREMENT`
+  FROM  INFORMATION_SCHEMA.TABLES
+  WHERE TABLE_SCHEMA = 'DatabaseName'
+  AND   TABLE_NAME   = 'TableName';
+  https://stackoverflow.com/questions/15821532/get-current-auto-increment-value-for-any-table
+  
+  ALTER TABLE tbl AUTO_INCREMENT = 5;
+  https://stackoverflow.com/questions/970597/change-auto-increment-starting-number
+
+mysqli usage http://codular.com/php-mysqli
+
+books class:
+  bug in update
+  bug in fetching pdf_path and registred_in(and user)
