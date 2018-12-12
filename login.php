@@ -24,7 +24,7 @@
     return $ipaddress;
   }
   
-  require_once("config.php")
+  require_once("config.php");
   
   if ($db->connect_errno > 0) {
     die('Unable to connect to database [' . $db->connect_error . ']');
