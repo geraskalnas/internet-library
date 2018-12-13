@@ -1,4 +1,22 @@
 <?php
+function getIP() {
+        $ipaddress = '';
+    if ($_SERVER['HTTP_CLIENT_IP'])
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_X_FORWARDED'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    else if($_SERVER['HTTP_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_FORWARDED'])
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if($_SERVER['REMOTE_ADDR'])
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+    $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
 class l_book
 {
     //1.Variables
@@ -122,6 +140,13 @@ class l_user
         }
         return $this->id;
     }
+    function getIdByIP($ip){//if logged result > 0
+        $sql="SELECT uid FROM lr WHERE tim > CURRENT_TIME() - INTERVAL 60 MINUTE AND DAT=CURRENT_DATE() AND ip='".$ip."';";
+        if (!$result = $this->db->query($sql)) {
+            die('There was an error running the query [' . $this->db->error . ']');
+        }
+        return $result->num_rows>0?$result->fetch_assoc()["uid"]:0;
+    }
     function get_name(){
         return $this->name;
     }
@@ -147,6 +172,9 @@ class l_user
         $this->set_hash("");
         $this->inDB = false;
         if($fdb){$this->db=false;}
+    }
+    function check($name, $hash){
+        
     }
     function commit()
     {
@@ -181,10 +209,14 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
     
     $l = new l_user;
     $l->set_db($db);
-    $l->set_name("asda");
-    $l->set_hash("7815696ecbf1c96e6894b779456d330e");
-    $l->commit();
-    //echo $l->get_name()."\n";
-    //echo $l->get_hash()."\n";
+    
+    $id=$l->getIdByIP(@getIP());
+    
+    if($id==0) die("Disconnected");
+    
+    $l->load(2);
+    
+    echo $l->get_name()."\n";
+    echo $l->get_hash()."\n";
 }
 ?>
