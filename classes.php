@@ -223,10 +223,9 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
     
     $id=$l->getIdByIP(@getIP());
     
-    echo $l->get_id();
-    //if($id==0) die("Disconnected");
+    if($id==0) die("Disconnected");
     
-    //$l->load(2);
+    $l->load(2);
     
     echo $l->get_name()."\n";
     echo $l->get_hash()."\n";
