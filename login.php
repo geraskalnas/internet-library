@@ -24,6 +24,8 @@ if($id!=0){
 
 if(!empty($out)){
     echo $out." logged.";
+}else if(isset($_GET["out"]) && $_GET["out"]==1){
+    $id=$l->logout($uid, @getIP());
 }else if(!(isset($_POST["sub"]) && $_POST["sub"]=="s")){
     echo '<form method="POST">';
     echo '<label>Vardas: </label>';
