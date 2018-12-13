@@ -172,20 +172,26 @@ class l_user
         $this->inDB = false;
         if($fdb){$this->db=false;}
     }
-    function check($name, $hash, $ip, $try=false, $login=true){// 0 false
+    function check($name, $hash, $ip, $login=false){// 0 false
         $sql = "SELECT id FROM users WHERE name='".$name."' AND hash='".$hash."';";
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
         }
-        $id=@$result->fetch_assoc()["id"];
-        if($try){
-            $sql = "INSERT INTO lr (uid, dat, tim, ip, pwtrue, ltype) VALUES(".$id.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($id==0?0:1).",".($login?1:0).");";
+        $uid=@$result->fetch_assoc()["id"];
+        if($login){
+            $sql = "INSERT INTO lr (uid, dat, tim, ip, pwtrue, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($id==0?0:1).", true);";
             if (!$result = $this->db->query($sql)) {
                 die('There was an error running the query [' . $this->db->error . ']');
             }
         }
         return $id;
     }
+  function logout($id, $ip){
+      $sql = "INSERT INTO lr (uid, dat, tim, ip, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', false);";
+      if (!$result = $this->db->query($sql)) {
+          die('There was an error running the query [' . $this->db->error . ']');
+      }
+  }
     function commit()
     {
         $this->get_id();
