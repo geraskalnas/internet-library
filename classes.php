@@ -172,15 +172,14 @@ class l_user
         $this->inDB = false;
         if($fdb){$this->db=false;}
     }
-    function check($name, $hash, $login=false, $ip=""){// 0 false
-        $sql = "SELECT id FROM users WHERE name='".$_POST["name"]."' AND hash='".md5($_POST["password"])."';";
+    function check($name, $hash, $ip, $try=false, $login=true){// 0 false
+        $sql = "SELECT id FROM users WHERE name='".$name."' AND hash='".$hash."';";
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
         }
-        $out=$result->fetch_assoc();
-        $id=$out["id"];
-        if($login && !empty($ip)){
-            $sql = "INSERT INTO lr (uid, dat, tim, ip) VALUES(".$id.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."')";
+        $id=@$result->fetch_assoc()["id"];
+        if($try){
+            $sql = "INSERT INTO lr (uid, dat, tim, ip, pwtrue, ltype) VALUES(".$id.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($id==0?0:1).",".($login?1:0).");";
             if (!$result = $this->db->query($sql)) {
                 die('There was an error running the query [' . $this->db->error . ']');
             }
@@ -221,11 +220,13 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
     $l = new l_user;
     $l->set_db($db);
     
-    $id=$l->getIdByIP(@getIP());
+    //$id=$l->getIdByIP(@getIP());
     
-    if($id==0) die("Disconnected");
+    //if($id==0) die("Disconnected");
     
     $l->load(2);
+    
+    $l->check("asda", "7815696ecbf1c96e6894b779456d330e", @getIP(), true);
     
     echo $l->get_name()."\n";
     echo $l->get_hash()."\n";
