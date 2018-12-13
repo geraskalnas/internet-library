@@ -13,3 +13,4 @@ mysqli usage http://codular.com/php-mysqli
 books class:
   bug in update
   bug in fetching pdf_path and registred_in(and user)
+bug in logout
