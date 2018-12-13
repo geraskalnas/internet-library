@@ -132,7 +132,6 @@ class l_user
     {
         if ($this->inDB == false) {
             $sql = "SELECT MAX(id)+1 FROM users;";
-            echo $sql;
             if (!$result = $this->db->query($sql)) {
                 die('There was an error running the query [' . $this->db->error . ']');
             }
@@ -140,7 +139,7 @@ class l_user
         }
         return $this->id;
     }
-    function getIdByIP($ip){//if logged result > 0
+    function getIdByIP($ip){//if logged: result > 0
         $sql="SELECT uid FROM lr WHERE tim > CURRENT_TIME() - INTERVAL 60 MINUTE AND DAT=CURRENT_DATE() AND ip='".$ip."';";
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
@@ -173,8 +172,20 @@ class l_user
         $this->inDB = false;
         if($fdb){$this->db=false;}
     }
-    function check($name, $hash){
-        
+    function check($name, $hash, $login=false, $ip=""){// 0 false
+        $sql = "SELECT id FROM users WHERE name='".$_POST["name"]."' AND hash='".md5($_POST["password"])."';";
+        if (!$result = $this->db->query($sql)) {
+            die('There was an error running the query [' . $this->db->error . ']');
+        }
+        $out=$result->fetch_assoc();
+        $id=$out["id"];
+        if($login && !empty($ip)){
+            $sql = "INSERT INTO lr (uid, dat, tim, ip) VALUES(".$id.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."')";
+            if (!$result = $this->db->query($sql)) {
+                die('There was an error running the query [' . $this->db->error . ']');
+            }
+        }
+        return $id;
     }
     function commit()
     {
@@ -212,9 +223,10 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
     
     $id=$l->getIdByIP(@getIP());
     
-    if($id==0) die("Disconnected");
+    echo $l->get_id();
+    //if($id==0) die("Disconnected");
     
-    $l->load(2);
+    //$l->load(2);
     
     echo $l->get_name()."\n";
     echo $l->get_hash()."\n";
