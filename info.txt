@@ -1,3 +1,5 @@
+mysql on cygwin configure https://www.rafaelhart.com/2015/06/mysql-on-cygwin-2015/
+
 auto increment manipulation:
   SELECT `AUTO_INCREMENT`
   FROM  INFORMATION_SCHEMA.TABLES
