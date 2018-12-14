@@ -15,10 +15,10 @@ $l = new l_user();
 
 $l->set_db($db);
 
-$id=$l->getIdByIP(@getIP());
+$id=$l->getIdByloggedIP(@getIP());
 
 if($id!=0){
-    $l->load($id);
+    $l->loadById($id);
     $out=$l->get_name();  
 }
 

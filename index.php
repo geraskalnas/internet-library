@@ -16,7 +16,7 @@ $l->set_db($db);
 
 //$sql=$l->commit();
 
-$l->load(2);
+$l->loadById(2);
 $autorius    = $l->get_author();
 $pavadinimas = $l->get_name();
 $imgPath     = $l->get_imgPath();
@@ -36,8 +36,10 @@ echo "";
 </head>
 <body>
   <div class="topnav">
-    <a class="active" href="/">Prad=ia</a>
+    <a class="active" href="index.php">Pradžia</a>
     <a href="login.php">Prisijungti</a>
+	<a href="classes.php?test=1">Testing</a>
+	<a href="../adminer.php">Adminer</a>
   </div>
   <div class="wrapper">
    

@@ -100,7 +100,7 @@ class l_book
         }
         return $sql;
     }
-    function load($id)
+    function loadById($id)
     {
         $sql = "SELECT name, author, year, imgPath FROM books WHERE id='" . $id . "';";
         if (!$result = $this->db->query($sql)) {
@@ -139,7 +139,7 @@ class l_user
         }
         return $this->id;
     }
-    function getIdByIP($ip){//if logged: result > 0
+    function getIdByLoggedIP($ip){//if logged: result > 0
         $sql="SELECT uid FROM lr WHERE tim > CURRENT_TIME() - INTERVAL 60 MINUTE AND DAT=CURRENT_DATE() AND ip='".$ip."';";
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
@@ -177,7 +177,10 @@ class l_user
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
         }
-        $uid=@$result->fetch_assoc()["id"];
+		$uid=@$result->fetch_assoc()["id"];
+		if($this->getIdByLoggedIP($ip)==$uid && $uid>0){
+		    return $uid;
+		}
         if($login){
             $sql = "INSERT INTO lr (uid, dat, tim, ip, pwtrue, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($id==0?0:1).", true);";
             if (!$result = $this->db->query($sql)) {
@@ -186,7 +189,7 @@ class l_user
         }
         return $id;
     }
-  function logout($id, $ip){
+  function logoutByIdAndIP($id, $ip){
       $sql = "INSERT INTO lr (uid, dat, tim, ip, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', false);";
       if (!$result = $this->db->query($sql)) {
           die('There was an error running the query [' . $this->db->error . ']');
@@ -201,7 +204,7 @@ class l_user
         }
         return $sql;
     }
-    function load($id)
+    function loadById($id)
     {
         $sql = "SELECT name, hash FROM users WHERE id='" . $id . "';";
         if (!$result = $this->db->query($sql)) {
@@ -230,7 +233,7 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
     
     //if($id==0) die("Disconnected");
     
-    $l->load(2);
+    $l->loadById(2);
     
     $l->check("asda", "7815696ecbf1c96e6894b779456d330e", @getIP(), true);
     
