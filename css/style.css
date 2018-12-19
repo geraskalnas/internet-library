@@ -1,65 +1,26 @@
-.wrapper{
+/*  Virsutine juosta */
+.topnav{
   display: flex;
-  flex-direction: row;
-  justify-content: space-arround;
-  align-items: flex-start;  
-}
-.sidebar {
-  /*border: 5px solid #222;*/
-  width: 25%;
-  /*height: 25vh;*/
-  min-height: 200px;
-  top: 5%;
-  
-}
-
-.main {
-  width: 95%;
-  height: 200vh;
-  min-height: 1000px;
-}
-
-.main,
-.sidebar {
-  /*border: 5px solid #222;*/
-  background-color: white;
-  border-radius: 10px;
-  color: #222;
-  padding: 15px;
-}
-
-body {
-  padding: 3%;
-  background-color: #ccc;
-  font-size: 20px;
-  box-sizing: border-box;
-}
-
-code, pre {
-  background-color: #ccc;
-  padding: 0 3px;
-  border-radius: 5px;
-}
-
-.bottom {
-  justify-self: bottom;
-}
-
-#l{
-  
-}
-
-.topnav {
+  justify-content: space-between;
   overflow: hidden;
+  
   background-color: black;
+  color: white;
+  
+  width: 99vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 10px;
 }
-
-.topnav a {
-  color: #f2f2f2;
-  text-align: center;
+.topnav div{
+  display: inline;
+}
+.topnav p{
+  margin: 0;
+}
+.topnav a{
+  color: white;
   text-decoration: none;
 }
-
 .topnav a:hover {
   background-color: #ddd;
   color: black;
@@ -68,4 +29,9 @@ code, pre {
 .topnav a.active {
   background-color: red;
   color: white;
+}
+
+/*  */
+.wrapper{
+  display: flex;
 }
