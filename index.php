@@ -7,6 +7,18 @@ if ($db->connect_errno > 0) {
     die('Unable to connect to database [' . $db->connect_error . ']');
 }
 
+$lu = new l_user();
+
+$lu->set_db($db);
+
+$id=$lu->getIdByIP(@getIP());
+
+$name="guest";
+if($id!=0){
+    $lu->loadById($id);
+    $name=$lu->get_name();  
+}
+
 $l = new l_book();
 $l->set_db($db);
 
@@ -36,10 +48,15 @@ echo "";
 </head>
 <body>
   <div class="topnav">
-    <a class="active" href="index.php">Pradžia</a>
-    <a href="login.php">Prisijungti</a>
-	<a href="classes.php?test=1">Testing</a>
-	<a href="../adminer.php">Adminer</a>
+    <div>
+        <a class="active" href="index.php">Pradžia</a>	     <div>
+        <a href="login.php">Prisijungti</a>	       <a class="active" href="/">Pradžia</a>
+ 	<a href="classes.php?test=1">Testing</a>	       <a href="login.php">Prisijungti</a>
+ 	<a href="../adminer.php">Adminer</a>
+    </div>
+    <div>
+      <p><?php echo $name; ?></p>
+    </div>
   </div>
   <div class="wrapper">
    
