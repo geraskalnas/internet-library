@@ -11,7 +11,7 @@ $lu = new l_user();
 
 $lu->set_db($db);
 
-$id=$lu->getIdByIP(@getIP());
+$id=$lu->getIdByLoggedIP(@getIP());
 
 $name="guest";
 if($id!=0){

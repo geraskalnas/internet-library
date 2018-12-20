@@ -177,17 +177,18 @@ class l_user
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
         }
-		$uid=@$result->fetch_assoc()["id"];
-		if($this->getIdByLoggedIP($ip)==$uid && $uid>0){
-		    return $uid;
-		}
+		$uid=0;
+		$uid=$result->fetch_assoc()["id"];
+		echo $uid;
+		
         if($login){
-            $sql = "INSERT INTO lr (uid, dat, tim, ip, pwtrue, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($id==0?0:1).", true);";
+            $sql = "INSERT INTO lr (uid, dat, tim, ip, pwtrue, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($uid==0?0:1).", 1);";
+            echo $sql."\n";
             if (!$result = $this->db->query($sql)) {
                 die('There was an error running the query [' . $this->db->error . ']');
             }
         }
-        return $id;
+        return $uid;
     }
   function logoutByIdAndIP($id, $ip){
       $sql = "INSERT INTO lr (uid, dat, tim, ip, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', false);";

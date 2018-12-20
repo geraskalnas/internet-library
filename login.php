@@ -15,7 +15,7 @@ $l = new l_user();
 
 $l->set_db($db);
 
-$id=$l->getIdByloggedIP(@getIP());
+$id=$l->getIdByLoggedIP(@getIP());
 
 if($id!=0){
     $l->loadById($id);
