@@ -3,10 +3,8 @@
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  
   background-color: black;
   color: white;
-  
   width: 99vw;
   margin-left: calc(-50vw + 50%);
   padding: 10px;
