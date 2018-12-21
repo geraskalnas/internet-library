@@ -19,10 +19,9 @@ CREATE TABLE `books` (
 
 INSERT INTO `books` (`id`, `name`, `author`, `year`, `registredIn`, `pdfPath`, `imgPath`) VALUES
 (1,	'Gilės nuotykiai Ydų šalyje',	'Vytautas Petkevičius',	2009,	'2018-10-29 00:00:00',	NULL,	'http://www.almalittera.lt/image.php?image=/img/uploads/virseliai/Giles-nuotykiai-Ydu-salyje.jpg'),
-(2,	'Math book',	'Iam',	2018,	'2018-10-29 00:00:00',	NULL,	NULL),
-(3,	'Doriano Grėjaus Portretas',	'Oskaras Vaildas',	NULL,	'2018-12-21 18:54:29',	NULL,	NULL),
-(4,	'Kuprelis',	'Ignas Šeinius',	NULL,	'2018-12-21 18:55:20',	NULL,	NULL),
-(5,	'Mažasis Princas',	'Antanas de Sent Egziuperi',	NULL,	'2018-12-21 18:56:34',	NULL,	NULL);
+(3,	'Doriano Grėjaus Portretas',	'Oskaras Vaildas',	1890,	'2018-12-21 18:54:29',	NULL,	'https://www.knyguklubas.lt/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/0/0/000000000002112284-59de80f297644-asset-knyguklubas-cdb_doriano-grejaus-portretas-virselis_p1.jpg'),
+(4,	'Kuprelis',	'Ignas Šeinius',	1913,	'2018-12-21 18:55:20',	'http://www.xn--altiniai-4wb.info/files/literatura/LH00/Ignas_%C5%A0einius._Kuprelis.LHM800.pdf',	'http://www.patogupirkti.lt/out/pictures/1/9986-06-037-0(2).gif'),
+(5,	'Mažasis Princas',	'Antanas de Sent Egziuperi',	1943,	'2018-12-21 18:56:34',	'http://ebiblioteka.mkp.emokykla.lt/kuriniai/mazasis_princas/,format.pdf',	'https://www.knyguklubas.lt/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/0/0/000000000001101494-59de81b9e41b6-asset-knyguklubas-cdb_ma%C5%BEasis-princas_p1.jpg');
 
 DROP TABLE IF EXISTS `lr`;
 CREATE TABLE `lr` (
@@ -57,4 +56,4 @@ INSERT INTO `users` (`id`, `name`, `hash`, `registredIn`) VALUES
 (1,	'admin',	'21232f297a57a5a743894a0e4a801fc3',	'2018-11-23'),
 (2,	'asda',	'7815696ecbf1c96e6894b779456d330e',	'2018-12-12');
 
--- 2018-12-21 17:00:13
+-- 2018-12-21 17:20:53
