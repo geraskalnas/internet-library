@@ -177,11 +177,9 @@ class l_user
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
         }
-		$uid=0;
 		$uid=$result->fetch_assoc()["id"];
-		echo $uid;
-		
-        if($login){
+
+        if($login && $uid>0){
             $sql = "INSERT INTO lr (uid, dat, tim, ip, pwtrue, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($uid==0?0:1).", 1);";
             echo $sql."\n";
             if (!$result = $this->db->query($sql)) {
