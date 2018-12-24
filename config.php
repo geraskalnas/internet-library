@@ -1,6 +1,9 @@
 <?php
 
 $db = new mysqli('localhost', 'lib_user', 'datalog15', 'lib');
-$db->set_charset("utf8");
+if ($db->connect_errno > 0) {
+    die('Unable to connect to database [' . $db->connect_error . ']');
+}
 
+$db->set_charset("utf8");
 ?>

@@ -1,20 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" >
-
-<head>
-  <meta charset="UTF-8">
-  <title>Library system</title>  
-  <link rel="stylesheet" href="css/style.css">  
-</head>
-<body>
 <?php
-
+include_once("presets/head.php");
 require_once("config.php");
 require_once("classes.php");
 
-if ($db->connect_errno > 0) {
-    die('Unable to connect to database [' . $db->connect_error . ']');
-}
+echo "<body>";
 
 $lu = new l_user();
 
@@ -28,22 +18,7 @@ if($id!=0){
     $name=$lu->get_name();  
 }
 
-$l = new l_book();
-$l->set_db($db);
 
-//$l->set_name("Math book");
-//$l->set_author("Iam");
-//$l->set_year("2018");
-
-//$sql=$l->commit();
-
-$l->loadById(2);
-$autorius    = $l->get_author();
-$pavadinimas = $l->get_name();
-$imgPath     = $l->get_imgPath();
-
-echo "";
-    //echo "<img src='" . $imgPath . "'style='width: 100%;height: auto;'>";
 
 ?>
 
