@@ -1,9 +1,6 @@
-<!DOCTYPE html>
 <?php
 include_once("presets/head.php");
-
 echo "<body>";
-
 include_once("presets/nav.php");
 
 ?>
@@ -34,9 +31,8 @@ include_once("presets/nav.php");
 					echo "<div>";
 					echo $row["author"] . " „" . $row["name"] . "“<br><br>";
 					echo "<img src='" . $row["imgPath"] . "'style='width: 100%;height: auto;'>";
-					echo "</div>";
+					echo "</div>\n";
 				}			
-				
 				?>
             </div>
             <div class="sidebar">

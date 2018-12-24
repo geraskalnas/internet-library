@@ -181,7 +181,6 @@ class l_user
 
         if($login && $uid>0){
             $sql = "INSERT INTO lr (uid, dat, tim, ip, pwtrue, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($uid==0?0:1).", 1);";
-            echo $sql."\n";
             if (!$result = $this->db->query($sql)) {
                 die('There was an error running the query [' . $this->db->error . ']');
             }
@@ -219,8 +218,13 @@ class l_user
 }
 
 if(isset($_GET["test"]) && $_GET["test"]=="1"){
-    require_once("config.php");
-    echo "start\n";
+	include_once("presets/head.php");
+	
+	echo "<body>";
+	
+	include_once("presets/nav.php");
+    
+	echo "start\n";
     if ($db->connect_errno > 0) {
         die('Unable to connect to database [' . $db->connect_error . ']');
     }
@@ -238,5 +242,7 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
     
     echo $l->get_name()."\n";
     echo $l->get_hash()."\n";
+	
+	echo "</body></html>";
 }
 ?>

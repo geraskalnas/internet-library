@@ -1,11 +1,7 @@
 <?php
-?>
-<html>
-<head></head>
-<body>
-<?php
-require_once("config.php");
-require_once("classes.php");
+include_once("presets/head.php");
+echo "<body>";
+include_once("presets/nav.php");
 
 if ($db->connect_errno > 0) {
     die('Unable to connect to database [' . $db->connect_error . ']');
