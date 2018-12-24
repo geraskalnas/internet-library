@@ -1,4 +1,5 @@
 mysql on cygwin configure https://www.rafaelhart.com/2015/06/mysql-on-cygwin-2015/
+https://superuser.com/questions/603026/mysql-how-to-fix-access-denied-for-user-rootlocalhost
 
 auto increment manipulation:
   SELECT `AUTO_INCREMENT`
