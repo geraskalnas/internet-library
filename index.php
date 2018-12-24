@@ -1,38 +1,13 @@
 <!DOCTYPE html>
 <?php
 include_once("presets/head.php");
-require_once("config.php");
-require_once("classes.php");
 
 echo "<body>";
 
-$lu = new l_user();
-
-$lu->set_db($db);
-
-$id=$lu->getIdByLoggedIP(@getIP());
-
-$name="guest";
-if($id!=0){
-    $lu->loadById($id);
-    $name=$lu->get_name();  
-}
-
-
+include_once("presets/nav.php");
 
 ?>
 
-  <div class="topnav">
-    <div>
-        <a class="active" href="index.php">Pradžia</a>
- 	    <a href="classes.php?test=1">Testing</a>
-        <a href="login.php">Prisijungti</a>
- 	    <a href="../adminer.php">Adminer</a>
-    </div>
-    <div>
-      <p><?php echo $name; ?></p>
-    </div>
-  </div>
   <div class="wrapper">
    
     
