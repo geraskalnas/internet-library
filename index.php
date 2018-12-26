@@ -23,7 +23,9 @@ include_once("presets/nav.php");
         <div class="main">
             <div id="knygos">
                 <?php
-				$sql = "SELECT name, author, imgPath FROM books ORDER BY id desc LIMIT 10;";
+				$sep=isset($_GET["size"])?$_GET["size"]:5;
+				$p=isset($_GET["page"])?$_GET["page"]-1:0;
+				$sql = "SELECT name, author, imgPath FROM books ORDER BY id desc LIMIT ".$p*$sep.", $sep;";
 				if (!$result = $db->query($sql)) {
 					die('There was an error running the query [' . $db->error . ']');
 				}
