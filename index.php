@@ -25,6 +25,8 @@ include_once("presets/nav.php");
                 <?php
 				$sep=isset($_GET["size"])?$_GET["size"]:5;
 				$p=isset($_GET["page"])?$_GET["page"]-1:0;
+				if($p<0) $p=0;
+				if($sep<2) $sep=5;
 				$sql = "SELECT name, author, imgPath FROM books ORDER BY id desc LIMIT ".$p*$sep.", $sep;";
 				if (!$result = $db->query($sql)) {
 					die('There was an error running the query [' . $db->error . ']');
