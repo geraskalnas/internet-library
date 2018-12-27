@@ -32,14 +32,25 @@ switch($a){
 	if($p<0) $p=0;
 	if($sep<2) $sep=5;
 	if($t=="books"){
-		$sql = "SELECT name, author FROM books ORDER BY id desc LIMIT ".$p*$sep.", $sep;";
+		$sql = "SELECT name, author, id FROM books ORDER BY id desc LIMIT ".$p*$sep.", $sep;";
 		if (!$result = $db->query($sql)) {
 			die('There was an error running the query [' . $db->error . ']');
 		}
 		while ($row = $result->fetch_assoc()){
-			echo "<a href=\"admin.php?action=show&type=users&i=".$row["id"]."\">". $row["author"] . " - \"". $row["name"] ."\"</a></br>\n";
+			echo "<a href=\"admin.php?action=show&type=books&i=".$row["id"]."\">". $row["author"] . " - \"". $row["name"] ."\"</a></br>\n";
+		}
+	}else{
+		$sql = "SELECT name, id FROM users ORDER BY id desc LIMIT ".$p*$sep.", $sep;";
+		if (!$result = $db->query($sql)) {
+			die('There was an error running the query [' . $db->error . ']');
+		}
+		while ($row = $result->fetch_assoc()){
+			echo "<a href=\"admin.php?action=show&type=users&i=".$row["id"]."\">". $row["name"] ."</a></br>\n";
 		}
 	}
+	echo "</br>\n</br>\n";
+	if($p>0) echo "<a href=\"admin.php?action=list&type=". $t . ($p==1?"":("&page=". ($p))) ."\">previous</a>	";
+	echo "<a href=\"admin.php?action=list&type=". $t ."&page=". ($p+2) ."\">next</a></br>\n";
 }
 ?>
 </body>
