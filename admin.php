@@ -4,7 +4,7 @@ echo "<body>";
 include_once("presets/nav.php");
 
 //if(!$lu->isAdmin()) die("only admin");
-if($name!="admin") die("only admin</body></html>");
+if($name!="admin") die("only admin\n</body>\n</html>");
 
 function validi($i){
 	if($i!=0){
@@ -51,6 +51,14 @@ switch($a){
 	echo "</br>\n</br>\n";
 	if($p>0) echo "<a href=\"admin.php?action=list&type=". $t . ($p==1?"":("&page=". ($p))) ."\">previous</a>	";
 	echo "<a href=\"admin.php?action=list&type=". $t ."&page=". ($p+2) ."\">next</a></br>\n";
+	break;
+	case "show":
+	if($t=="books"){
+		
+	}else{
+		
+	}
+	break;
 }
 ?>
 </body>
