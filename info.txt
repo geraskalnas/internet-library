@@ -17,3 +17,6 @@ books class:
   bug in update
   bug in fetching pdf_path and registred_in(and user)
 bug in logout
+
+template engine:
+  https://www.broculos.net/2008/03/how-to-make-simple-html-template-engine.html
