@@ -218,16 +218,13 @@ class l_user
 }
 
 if(isset($_GET["test"]) && $_GET["test"]=="1"){
-	include_once("presets/head.php");
+	require_once("config.php");
+	include("templateEngine.php");
+    $layout = new Template("templates/layout.t");
+	$layout->set("title", $PAGE_TITLE);
+	$layout->set("username", $name);
 	
-	echo "<body>";
-	
-	include_once("presets/nav.php");
-    
-	echo "start\n";
-    if ($db->connect_errno > 0) {
-        die('Unable to connect to database [' . $db->connect_error . ']');
-    }
+	$content="start</br>\n";
     
     $l = new l_user;
     $l->set_db($db);
@@ -240,9 +237,11 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
     
     $l->check("asda", "7815696ecbf1c96e6894b779456d330e", @getIP(), true);
     
-    echo $l->get_name()."\n";
-    echo $l->get_hash()."\n";
+    $content.= $l->get_name()."</br>\n";
+    $content.= $l->get_hash()."</br>\n";
 	
-	echo "</body></html>";
+	$layout->set("content", $content);
+	echo $layout->output();
+	
 }
 ?>

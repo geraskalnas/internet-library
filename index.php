@@ -1,22 +1,7 @@
 <?php
-require_once("config.php");
 require_once("classes.php");
+require_once("config.php");
 include("templateEngine.php");
-
-$page=$_SERVER['REQUEST_URI'];
-$a="class=\"active\" ";
-
-$lu = new l_user();
-
-$lu->set_db($db);
-
-$id=$lu->getIdByLoggedIP(@getIP());
-
-$name="guest";
-if($id!=0){
-    $lu->loadById($id);
-    $name=$lu->get_name();  
-}
 
 /*
 Pagrindas
@@ -28,12 +13,9 @@ Pagrindas
 
 //Pagrindas
 $layout = new Template("templates/layout.t");
-$layout->set("title", "Library system");
+$layout->set("title", $PAGE_TITLE);
 
-	//Virsus
-	$nav = new Template("templates/nav.t");
-	$nav->set("username", $name);
-	$layout->set("nav", $nav->output());
+	$layout->set("username", $name);
 
 	//Kita
 	$wrapper = new Template("templates/wrapper.t");
@@ -72,6 +54,6 @@ $layout->set("title", "Library system");
 			}
 			$books = Template::merge($booksTemplates);
 			$wrapper->set("books", $books);
-		$layout->set("wrapper", $wrapper->output());
+		$layout->set("content", $wrapper->output());
 echo $layout->output();
 ?>

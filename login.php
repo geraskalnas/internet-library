@@ -1,43 +1,26 @@
 <?php
-include_once("presets/head.php");
-echo "<body>";
-include_once("presets/nav.php");
+require_once("classes.php");
+require_once("config.php");
+include("templateEngine.php");
 
-if ($db->connect_errno > 0) {
-    die('Unable to connect to database [' . $db->connect_error . ']');
-}
+$layout = new Template("templates/layout.t");
+$layout->set("title", $PAGE_TITLE);
+$layout->set("username", $name);
 
-$l = new l_user();
-
-$l->set_db($db);
-
-$id=$l->getIdByLoggedIP(@getIP());
-
-if($id!=0){
-    $l->loadById($id);
-    $out=$l->get_name();  
-}
-
-if(!empty($out)){
-    echo $out." logged.";
-}else if(isset($_GET["out"]) && $_GET["out"]==1){
-    $id=$l->logout($uid, @getIP());
+if(isset($_GET["out"]) && $_GET["out"]==1){
+    $id=$lu->logoutByIdAndIP(@getIP(), $id);
+}else if($name!="guest"){
+    $layout->set("content", $name." logged.");
 }else if(!(isset($_POST["sub"]) && $_POST["sub"]=="s")){
-    echo '<form method="POST">';
-    echo '<label>Vardas: </label>';
-    echo '<input type="text" name="name">';
-    echo '<br>';
-    echo '<label>Slaptažodis: </label>';
-    echo '<input type="password" name="password">';
-    echo '<input type="submit" name="sub" value="s">';
-    echo '</form>';
+    $form = new Template("templates/login_form.t");
+	$layout->set("content", $form->output());
 }else{
-    $id=$l->check($_POST["name"], md5($_POST["password"]), @getIP(), true);
+    $id=$lu->check($_POST["name"], md5($_POST["password"]), @getIP(), true);
     
     if($id!=0){
-        echo $_POST["name"]." logged.";
-    }else echo "Wrong information.";
+        $layout->set("content", $_POST["name"]." logged.");
+    }else $layout->set("content", "Wrong information.");
 }
+
+echo $layout->output();
 ?>
-</body>
-</html>
