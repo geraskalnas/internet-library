@@ -1,7 +1,11 @@
 <?php
-include_once("presets/head.php");
-echo "<body>";
-include_once("presets/nav.php");
+require_once("classes.php");
+require_once("config.php");
+include("templateEngine.php");
+
+$layout = new Template("templates/layout.t");
+$layout->set("title", $PAGE_TITLE);
+$layout->set("username", $name);
 
 //if(!$lu->isAdmin()) die("only admin");
 if($name!="admin") die("only admin\n</body>\n</html>");
@@ -21,10 +25,12 @@ if(!(($a=="show" || $a=="edit") && ($t=="books" || $t=="users") && validi($i)) &
 	$a="manage";
 }
 
+$content="";
+
 switch($a){
 	case "manage":
-	echo "<a href=\"admin.php?action=list&type=books\">books</a></br>\n";
-	echo "<a href=\"admin.php?action=list&type=users\">users</a></br>\n";
+	$content.= "<a href=\"admin.php?action=list&type=books\">books</a></br>\n";
+	$content.= "<a href=\"admin.php?action=list&type=users\">users</a></br>\n";
 	break;
 	case "list":
 	$sep=isset($_GET["size"])?$_GET["size"]:5;
@@ -37,7 +43,7 @@ switch($a){
 			die('There was an error running the query [' . $db->error . ']');
 		}
 		while ($row = $result->fetch_assoc()){
-			echo "<a href=\"admin.php?action=show&type=books&i=".$row["id"]."\">". $row["author"] . " - \"". $row["name"] ."\"</a></br>\n";
+			$content.= "<a href=\"admin.php?action=show&type=books&i=".$row["id"]."\">". $row["author"] . " - \"". $row["name"] ."\"</a></br>\n";
 		}
 	}else{
 		$sql = "SELECT name, id FROM users ORDER BY id desc LIMIT ".$p*$sep.", $sep;";
@@ -45,12 +51,12 @@ switch($a){
 			die('There was an error running the query [' . $db->error . ']');
 		}
 		while ($row = $result->fetch_assoc()){
-			echo "<a href=\"admin.php?action=show&type=users&i=".$row["id"]."\">". $row["name"] ."</a></br>\n";
+			$content.= "<a href=\"admin.php?action=show&type=users&i=".$row["id"]."\">". $row["name"] ."</a></br>\n";
 		}
 	}
-	echo "</br>\n</br>\n";
-	if($p>0) echo "<a href=\"admin.php?action=list&type=". $t . ($p==1?"":("&page=". ($p))) ."\">previous</a>	";
-	echo "<a href=\"admin.php?action=list&type=". $t ."&page=". ($p+2) ."\">next</a></br>\n";
+	$content.= "</br>\n</br>\n";
+	if($p>0) $content.= "<a href=\"admin.php?action=list&type=". $t . ($p==1?"":("&page=". ($p))) ."\">previous</a>	";
+	$content.= "<a href=\"admin.php?action=list&type=". $t ."&page=". ($p+2) ."\">next</a></br>\n";
 	break;
 	case "show":
 	if($t=="books"){
@@ -60,6 +66,7 @@ switch($a){
 	}
 	break;
 }
+
+$layout->set("content", $content);
+echo $layout->output();
 ?>
-</body>
-</html>

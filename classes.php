@@ -140,7 +140,7 @@ class l_user
         return $this->id;
     }
     function getIdByLoggedIP($ip){//if logged: result > 0
-        $sql="SELECT uid FROM lr WHERE tim > CURRENT_TIME() - INTERVAL 60 MINUTE AND DAT=CURRENT_DATE() AND ip='".$ip."';";
+        $sql="SELECT uid FROM lr WHERE tim > CURRENT_TIME() - INTERVAL 60 MINUTE AND DAT=CURRENT_DATE() AND ip='".$ip."' ORDER BY id desc LIMIT 1;";
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
         }

@@ -17,7 +17,7 @@ $layout->set("title", $PAGE_TITLE);
 
 	$layout->set("username", $name);
 
-	//Kita
+	//"ivynioklis"
 	$wrapper = new Template("templates/wrapper.t");
 		//Sonine juosta
 		$sidebar = new Template("templates/sidebar.t");
