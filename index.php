@@ -46,7 +46,7 @@ $layout->set("title", $PAGE_TITLE);
 				die('There was an error running the query [' . $db->error . ']');
 			}
 			while ($row = $result->fetch_assoc()){
-				$book = new Template("templates/book.t");
+				$book = new Template("templates/booksBook.t");
 				$book->set("name", $row["name"]);
 				$book->set("author", $row["author"]);
 				$book->set("url", "show.php?id=".$row["id"]);
