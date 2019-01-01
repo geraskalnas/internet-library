@@ -33,14 +33,14 @@ INSERT INTO `books` (`id`, `name`, `author`, `year`, `registredIn`, `pdfPath`, `
 DROP TABLE IF EXISTS `lr`;
 CREATE TABLE `lr` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL,
+  `uid` int(11) DEFAULT NULL,
   `ip` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `pwtrue` int(1) NOT NULL DEFAULT '1',
   `ltype` int(1) NOT NULL DEFAULT '1',
   `dat` date NOT NULL,
   `tim` time NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -56,4 +56,4 @@ INSERT INTO `users` (`id`, `name`, `hash`, `registredIn`, `type`) VALUES
 (1,	'admin',	'21232f297a57a5a743894a0e4a801fc3',	'2018-11-23',	'admin'),
 (2,	'asda',	'7815696ecbf1c96e6894b779456d330e',	'2018-12-12',	'normal');
 
--- 2018-12-26 14:56:30
+-- 2019-01-01 15:13:25
