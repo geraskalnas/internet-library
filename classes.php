@@ -179,17 +179,19 @@ class l_user
         }
 		$uid=$result->fetch_assoc()["id"];
 
-        if($login && $uid>0){
-            $sql = "INSERT INTO lr (uid, dat, tim, ip, pwtrue, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($uid==0?0:1).", 1);";
+        if($login){
+            $sql = "INSERT INTO lr (".($uid==0?"":"uid, ")."dat, tim, ip, pwtrue, ltype) VALUES(".($uid==0?"":$uid.", ")."CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($uid==0?0:1).", 1);";
             if (!$result = $this->db->query($sql)) {
+				echo "sql: ".$sql."</br>\n";
                 die('There was an error running the query [' . $this->db->error . ']');
             }
         }
         return $uid;
     }
-  function logoutByIdAndIP($id, $ip){
-      $sql = "INSERT INTO lr (uid, dat, tim, ip, ltype) VALUES(".$uid.", CURRENT_DATE(), CURRENT_TIME(), '".$ip."', false);";
+  function logoutByIP($ip){
+      $sql = "INSERT INTO lr (dat, tim, ip, ltype) VALUES(CURRENT_DATE(), CURRENT_TIME(), '".$ip."', 0);";
       if (!$result = $this->db->query($sql)) {
+		  echo "sql: ".$sql."</br>\n";
           die('There was an error running the query [' . $this->db->error . ']');
       }
   }

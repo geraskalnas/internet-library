@@ -10,6 +10,11 @@ auto increment manipulation:
   
   ALTER TABLE tbl AUTO_INCREMENT = 5;
   https://stackoverflow.com/questions/970597/change-auto-increment-starting-number
+  
+  CREATE TABLE `one` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `asd` int NOT NULL
+) AUTO_INCREMENT=1;
 
 mysqli usage:
   http://codular.com/php-mysqli

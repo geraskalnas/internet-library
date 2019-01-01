@@ -8,10 +8,15 @@ switch ($_SERVER["SCRIPT_NAME"]) {
 		$CURRENT_PAGE = "login"; 
 		$PAGE_TITLE = "Library System - login";
 		break;
+	case "/library/classes.php":
+		$CURRENT_PAGE = "Testing"; 
+		$PAGE_TITLE = "Library System - testing";
+		if(isset($_GET["test"]) && $_GET["test"]=="1") break;
 	default:
 		$CURRENT_PAGE = "Index";
 		$PAGE_TITLE = "Library System";
 }
+//$active
 
 $db = new mysqli('localhost', 'lib_user', 'datalog15', 'lib');
 if ($db->connect_errno > 0) {

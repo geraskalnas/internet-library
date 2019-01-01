@@ -8,7 +8,8 @@ $layout->set("title", $PAGE_TITLE);
 $layout->set("username", $name);
 
 if(isset($_GET["out"]) && $_GET["out"]==1){
-    $id=$lu->logoutByIdAndIP(@getIP(), $id);
+    $id=$lu->logoutByIP(@getIP());
+	$layout->set("content", "Logged out.");
 }else if($name!="guest"){
     $layout->set("content", $name." logged.");
 }else if(!(isset($_POST["sub"]) && $_POST["sub"]=="s")){
