@@ -237,7 +237,7 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
     
     $l->loadById(2);
     
-    $l->check("asda", "7815696ecbf1c96e6894b779456d330e", @getIP(), true);
+    $l->check("asda", "7815696ecbf1c96e6894b779456d330e", @getIP(), false);
     
     $content.= $l->get_name()."</br>\n";
     $content.= $l->get_hash()."</br>\n";

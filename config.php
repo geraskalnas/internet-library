@@ -23,6 +23,8 @@ if ($db->connect_errno > 0) {
     die('Unable to connect to database [' . $db->connect_error . ']');
 }
 
+$bookO = new l_book();
+$bookO->set_db($db);
 $lu = new l_user();
 $lu->set_db($db);
 $id=$lu->getIdByLoggedIP(@getIP());

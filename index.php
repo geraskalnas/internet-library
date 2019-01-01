@@ -21,15 +21,15 @@ $layout->set("title", $PAGE_TITLE);
 	$wrapper = new Template("templates/wrapper.t");
 		//Sonine juosta
 		$sidebar = new Template("templates/sidebar.t");
-		$sidebar->set("title", "PaskutinÄ—s 10:");
-			$sql = "SELECT name, author FROM books ORDER BY id desc;";
+		$sidebar->set("title", "Paskutines 10:");
+			$sql = "SELECT id, name, author FROM books ORDER BY id desc;";
 			if (!$result = $db->query($sql)) {
 				die('There was an error running the query [' . $db->error . ']');
 			}
 			while ($row = $result->fetch_assoc()){
-				$book = new Template("templates/link.t");
-				$book->set("name", $row["author"]." - ".$row["name"]);
-				$book->set("spec", "");
+				$book = new Template("templates/sidebarBookLink.t");
+				$book->set("name", $row["author"]." „".$row["name"]."“");
+				$book->set("url", "show.php?id=".$row["id"]);
 				$booksTemplates[]=$book;
 			}
 			$books = Template::merge($booksTemplates);
@@ -49,6 +49,7 @@ $layout->set("title", $PAGE_TITLE);
 				$book = new Template("templates/book.t");
 				$book->set("name", $row["name"]);
 				$book->set("author", $row["author"]);
+				$book->set("url", "show.php?id=".$row["id"]);
 				$book->set("imgUrl", $row["imgPath"]);
 				$booksTemplates[]=$book;
 			}
