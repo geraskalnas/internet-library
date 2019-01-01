@@ -5,7 +5,7 @@ include("templateEngine.php");
 
 $layout = new Template("templates/layout.t");
 $layout->set("title", $PAGE_TITLE);
-$layout->set("username", $name);
+
 
 if(isset($_GET["out"]) && $_GET["out"]==1){
     $id=$lu->logoutByIP(@getIP());
@@ -23,5 +23,12 @@ if(isset($_GET["out"]) && $_GET["out"]==1){
     }else $layout->set("content", "Wrong information.");
 }
 
+$name="guest";
+if($id!=0){
+    $lu->loadById($id);
+    $name=$lu->get_name();  
+}
+
+$layout->set("username", $name);
 echo $layout->output();
 ?>

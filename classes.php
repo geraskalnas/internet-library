@@ -180,7 +180,7 @@ class l_user
 		$uid=$result->fetch_assoc()["id"];
 
         if($login){
-            $sql = "INSERT INTO lr (".($uid==0?"":"uid, ")."dat, tim, ip, pwtrue, ltype) VALUES(".($uid==0?"":$uid.", ")."CURRENT_DATE(), CURRENT_TIME(), '".$ip."', ".($uid==0?0:1).", 1);";
+            $sql = "INSERT INTO lr (".($uid==0?"":"uid, ")."dat, tim, ip, ltype) VALUES(".($uid==0?"":$uid.", ")."CURRENT_DATE(), CURRENT_TIME(), '".$ip."', 1);";
             if (!$result = $this->db->query($sql)) {
 				echo "sql: ".$sql."</br>\n";
                 die('There was an error running the query [' . $this->db->error . ']');
