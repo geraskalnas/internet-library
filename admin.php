@@ -1,11 +1,7 @@
 <?php
 require_once("classes.php");
 require_once("config.php");
-include("templateEngine.php");
-
-$layout = new Template("templates/layout.t");
-$layout->set("title", $PAGE_TITLE);
-$layout->set("username", $name);
+require_once("pre.php");
 
 //if(!$lu->isAdmin()) die("only admin");
 if(($lu->get_type())!="admin") {
