@@ -1,28 +1,28 @@
 <?php
 require_once("classes.php");
 require_once("config.php");
-include("templateEngine.php");
-
-$layout = new Template("templates/layout.t");
-$layout->set("title", $PAGE_TITLE);
+require_once("pre.php");
 
 
+$content= "<div class=\"bei\">";
 if(isset($_GET["out"]) && $_GET["out"]==1){
     $id=$lu->logoutByIP(@getIP());
-	$layout->set("content", "Logged out.");
+    $content.="Logged out.";
 }else if($name!="guest"){
-    $layout->set("content", $name." logged.");
+    $content.= $name." logged.";
 }else if(!(isset($_POST["sub"]) && $_POST["sub"]=="s")){
     $form = new Template("templates/login_form.t");
-	$layout->set("content", $form->output());
+	$content.= $form->output();
 }else{
     $id=$lu->check($_POST["name"], md5($_POST["password"]), @getIP(), true);
     
     if($id!=0){
-        $layout->set("content", $_POST["name"]." logged.");
-    }else $layout->set("content", "Wrong information.");
+        $content.= $_POST["name"]." logged.";
+    }else $content.="Wrong information.";
 }
 
+$content.="</div>";
+$layout->set("content", $content);
 $name="guest";
 if($id!=0){
     $lu->loadById($id);

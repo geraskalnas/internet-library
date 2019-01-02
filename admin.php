@@ -8,7 +8,11 @@ $layout->set("title", $PAGE_TITLE);
 $layout->set("username", $name);
 
 //if(!$lu->isAdmin()) die("only admin");
-if($name!="admin") die("only admin\n</body>\n</html>");
+if(($lu->get_type())!="admin") {
+    $layout->set("content", "only admin");
+    echo $layout->output();
+    die();
+}
 
 function validi($i){
 	if($i!=0){

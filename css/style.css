@@ -38,17 +38,25 @@ body {
     margin: 0;
 }
 
+.bei {
+    background-color: beige;
+    max-width: 15%;
+    margin: 10px;
+    padding: 5px;
+}
+
 #knygos {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-}
+}/*
 #knygos > div {
     background-color: beige;
     max-width: 15%;
     margin: 10px;
     padding: 5px;
 }
+*/
 
 /* Sonines justos */
 .sidebar{
@@ -93,3 +101,4 @@ body {
 .wrapper{
   display: flex;
 }
+

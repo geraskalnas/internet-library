@@ -18,6 +18,11 @@
 	</div>
 </div>
 <div class="wrapper">
+    <div class="bei">
+        <h3>[@sidebarTitle]</h3>
+        </br>
+        [@sidebarContent]
+    </div>
 [@content]
 </div>
 </body>

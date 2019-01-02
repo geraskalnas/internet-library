@@ -1,1 +1,1 @@
-<a href="[@url]">[@name]</a></br>
+<a href="[@url]">[@author] „[@name]“</a></br>

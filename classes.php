@@ -26,6 +26,7 @@ class l_book
     private $author = "";
     private $year = "";
     private $imgPath = "";
+    private $pdfPath = "";
     private $inDB = false;
     private $db = false;
     //2.Functions
@@ -59,6 +60,9 @@ class l_book
     {
         return $this->imgPath;
     }
+    function get_pdfPath(){
+        return $this->pdfPath;
+    }
     //2.1.2.Set
     function set_name($value)
     {
@@ -76,6 +80,9 @@ class l_book
     {
         $this->imgPath = $value;
     }
+    function set_pdfPath($value){
+        $this->pdfPath = $value;
+    }
     function set_db(&$value)
     {
         $this->db = $value;
@@ -88,6 +95,7 @@ class l_book
         $this->set_author("");
         $this->set_year("");
         $this->set_imgPath("");
+        $this->set_pdfPath("");
         $this->inDB = false;
         if($fdb){$this->db=false;}
     }
@@ -102,7 +110,7 @@ class l_book
     }
     function loadById($id)
     {
-        $sql = "SELECT name, author, year, imgPath FROM books WHERE id='" . $id . "';";
+        $sql = "SELECT name, author, year, imgPath, pdfPath FROM books WHERE id='" . $id . "';";
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
         }
@@ -112,6 +120,7 @@ class l_book
         $this->set_author($row['author']);
         $this->set_year($row['year']);
         $this->set_imgPath($row['imgPath']);
+        $this->set_pdfPath($row['pdfPath']);
         $this->inDB=true;
         return $sql;
     }
@@ -125,6 +134,7 @@ class l_user
     private $id = 0;
     private $name = "";
     private $hash = "";
+    private $type = "";
     private $inDB = false;
     private $db = false;
     
@@ -152,6 +162,9 @@ class l_user
     function get_hash(){
         return $this->hash;
     }
+    function get_type(){
+        return $this->type;
+    }
     function set_name($value)
     {
         $this->name = $value;
@@ -169,6 +182,7 @@ class l_user
         $this->id=0;
         $this->set_name("");
         $this->set_hash("");
+        $this->type = "";
         $this->inDB = false;
         if($fdb){$this->db=false;}
     }
@@ -206,7 +220,7 @@ class l_user
     }
     function loadById($id)
     {
-        $sql = "SELECT name, hash FROM users WHERE id='" . $id . "';";
+        $sql = "SELECT name, hash, type FROM users WHERE id='" . $id . "';";
         if (!$result = $this->db->query($sql)) {
             die('There was an error running the query [' . $this->db->error . ']');
         }
@@ -214,6 +228,7 @@ class l_user
         $this->id=$id;
         $this->set_name($row['name']);
         $this->set_hash($row['hash']);
+        $this->type=$row["type"];
         $this->inDB=true;
         return $sql;
     }  
@@ -221,12 +236,9 @@ class l_user
 
 if(isset($_GET["test"]) && $_GET["test"]=="1"){
 	require_once("config.php");
-	include("templateEngine.php");
-    $layout = new Template("templates/layout.t");
-	$layout->set("title", $PAGE_TITLE);
-	$layout->set("username", $name);
-	
-	$content="start</br>\n";
+	require_once("pre.php");
+    
+    $content="<div class=\"bei\">start</br>\n";
     
     $l = new l_user;
     $l->set_db($db);
@@ -242,6 +254,7 @@ if(isset($_GET["test"]) && $_GET["test"]=="1"){
     $content.= $l->get_name()."</br>\n";
     $content.= $l->get_hash()."</br>\n";
 	
+	$content.= "</div>";
 	$layout->set("content", $content);
 	echo $layout->output();
 	
