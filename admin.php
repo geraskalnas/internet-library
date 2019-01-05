@@ -25,12 +25,12 @@ if(!(($a=="show" || $a=="edit") && ($t=="books" || $t=="users") && validi($i)) &
 	$a="manage";
 }
 
-$content="";
+$content="<div class=\"bei\">";
 
 switch($a){
 	case "manage":
-	$content.= "<a href=\"admin.php?action=list&type=books\">books</a></br>\n";
-	$content.= "<a href=\"admin.php?action=list&type=users\">users</a></br>\n";
+	$content.= "<a href='admin.php?action=list&type=books'>books</a></br>\n";
+	$content.= "<a href='admin.php?action=list&type=users'>users</a></br>\n";
 	break;
 	case "list":
 	$sep=isset($_GET["size"])?$_GET["size"]:5;
@@ -58,7 +58,7 @@ switch($a){
 	if($p>0) $content.= "<a href=\"admin.php?action=list&type=". $t . ($p==1?"":("&page=". ($p))) ."\">previous</a>	";
 	$content.= "<a href=\"admin.php?action=list&type=". $t ."&page=". ($p+2) ."\">next</a></br>\n";
 	break;
-	case "show":
+	case "edit":
 	if($t=="books"){
 		
 	}else{
@@ -66,7 +66,7 @@ switch($a){
 	}
 	break;
 }
-
+$content.="</div>";
 $layout->set("content", $content);
 echo $layout->output();
 ?>
