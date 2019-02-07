@@ -26,3 +26,5 @@ php layout:
 
 books class:
   bug in commit
+
+$db = new mysqli('localhost', 'id4519783_lib_user', 'datalog15', 'id4519783_lib');
