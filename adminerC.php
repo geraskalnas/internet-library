@@ -11,13 +11,13 @@ if(($lu->get_type())!="admin") {
 }
 
 $ra=array();
-function analyze($dat, &$ra, $s="", $i=1){
+function analyze($dat, &$ra, $s="", $i=true){
     foreach($dat as $key=>$val){
         if(!is_array($val)){
             array_push($ra, array($s.($i==1?$key:"[$key]"), $val));
         }
         else{
-            analyze($val, $ra, $s.($i==1?$key:"[$key]"), $i+1);
+            analyze($val, $ra, $s.($i==1?$key:"[$key]"), false);
         }
     }
     
@@ -37,7 +37,7 @@ foreach($l as $i){
         $value=$item[1];
         $content.="<input type=\"hidden\" name=\"". htmlspecialchars($path) ."\" value=\"". htmlspecialchars($value) ."\">";
     }
-    $content.="<input type=\"submit\" name=\"$name\">";
+    $content.="<input type=\"submit\" value=\"$name\">";
     $content.="</form>";
     $content.="</br>";
 }
