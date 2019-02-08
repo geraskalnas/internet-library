@@ -14,32 +14,35 @@ $ra=array();
 function analyze($dat, &$ra, $s="", $i=true){
     foreach($dat as $key=>$val){
         if(!is_array($val)){
-            array_push($ra, array($s.($i==1?$key:"[$key]"), $val));
+            array_push($ra, array($s.($i?$key:"[$key]"), $val));
         }
         else{
-            analyze($val, $ra, $s.($i==1?$key:"[$key]"), false);
+            analyze($val, $ra, $s.($i?$key:"[$key]"), false);
         }
     }
     
 }
 
-$l=array(array("uswm", "c/uswm.json"));
+$content="";
 
-foreach($l as $i){
-    $name=$i[0];
-    $url=$i[1];
+$ppath="c/";
+$l=array();
+foreach(scandir($ppath) as $file){
+    if($file!="." && $file!="..")array_push($l, $file);
+}
 
-    $dat=json_decode(file_get_contents($url), true);
+foreach($l as $url){
+    $dat=json_decode(file_get_contents($ppath.$url), true);
     analyze($dat, $ra);
-    $content='<form action="../adminer.php" method="post">';
+    $content.='<form action="../adminer.php" method="post">';
     foreach($ra as $item){
         $path=$item[0];
         $value=$item[1];
-        $content.="<input type=\"hidden\" name=\"". htmlspecialchars($path) ."\" value=\"". htmlspecialchars($value) ."\">";
+        $content.="<input type=\"hidden\" name=\"". htmlspecialchars($path) ."\" value=\"". htmlspecialchars($value) ."\">\n";
     }
-    $content.="<input type=\"submit\" value=\"$name\">";
-    $content.="</form>";
-    $content.="</br>";
+    $content.="<input type=\"submit\" value=\"$url\">\n";
+    $content.="</form>\n";
+    $content.="</br>\n";
 }
 
 $layout->set("content", $content);
