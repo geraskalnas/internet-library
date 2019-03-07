@@ -17,8 +17,11 @@ switch ($_SERVER["SCRIPT_NAME"]) {
 		$PAGE_TITLE = "Library System";
 }
 //$active
-
-$db = new mysqli('remotemysql.com', 'Y0E7ho32OA', 'Y0E7ho32OA', 'Y0E7ho32OA');
+$DBhost='remotemysql.com';
+$DBusername='Y0E7ho32OA';
+$DBpassword='EtWs4O2BeQ';
+$DBdatabase='Y0E7ho32OA';
+$db = new mysqli($DBhost, $DBusername, $DBpassword, $DBdatabase);
 if ($db->connect_errno > 0) {
     die('Unable to connect to database [' . $db->connect_error . ']');
 }
