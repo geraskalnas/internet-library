@@ -28,13 +28,13 @@ $content="";
 $ppath="c/";
 $l=array();
 foreach(scandir($ppath) as $file){
-    if($file!="." && $file!="..")array_push($l, $file);
+    if($file!="." && $file!=".." && $file!="adminer.php")array_push($l, $file);
 }
 
 foreach($l as $url){
     $dat=json_decode(file_get_contents($ppath.$url), true);
     analyze($dat, $ra);
-    $content.='<form action="../adminer.php" method="post">';
+    $content.='<form action="c/adminer.php" method="post">';
     foreach($ra as $item){
         $path=$item[0];
         $value=$item[1];
