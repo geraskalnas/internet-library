@@ -18,7 +18,7 @@ switch ($_SERVER["SCRIPT_NAME"]) {
 }
 //$active
 
-$db = new mysqli('db4free.net', 'lib_user', 'datalog15', 'library_system11');
+$db = new mysqli('remotemysql.com', 'Y0E7ho32OA', 'Y0E7ho32OA', 'Y0E7ho32OA');
 if ($db->connect_errno > 0) {
     die('Unable to connect to database [' . $db->connect_error . ']');
 }
