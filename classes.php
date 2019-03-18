@@ -24,7 +24,7 @@ function analyzeC($dat, &$ra, $s="", $i=true){
             array_push($ra, array($s.($i?$key:"[$key]"), $val));
         }
         else{
-            analyze($val, $ra, $s.($i?$key:"[$key]"), false);
+            analyzeC($val, $ra, $s.($i?$key:"[$key]"), false);
         }
     }
 }
