@@ -10,18 +10,6 @@ if(($lu->get_type())!="admin") {
     die();
 }
 
-function analyze($dat, &$ra, $s="", $i=true){
-    foreach($dat as $key=>$val){
-        if(!is_array($val)){
-            array_push($ra, array($s.($i?$key:"[$key]"), $val));
-        }
-        else{
-            analyze($val, $ra, $s.($i?$key:"[$key]"), false);
-        }
-    }
-    
-}
-
 $content="";
 
 $ppath="c/";
