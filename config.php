@@ -21,7 +21,7 @@ switch ($_SERVER["SCRIPT_NAME"]) {
 $ppath="c/";
 $cfile="remotemysql.json";
 $ra=array();
-$dat=json_decode(file_get_contents($ppath.$url), true);
+$dat=json_decode(file_get_contents($ppath.$cfile), true);
 analyzeC($dat, $ra);
 $db = new mysqli($ra["auth"]["server"], $ra["auth"]["username"], $ra["auth"]["password"], $ra["auth"]["db"]);
 if ($db->connect_errno > 0) {
