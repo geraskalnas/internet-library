@@ -12,7 +12,6 @@ if(($lu->get_type())!="admin") {
 
 $content="";
 
-$ppath="c/";
 $l=array();
 foreach(scandir($ppath) as $file){
     if($file!="." && $file!="..")array_push($l, $file);
@@ -21,7 +20,7 @@ foreach(scandir($ppath) as $file){
 foreach($l as $url){
     $ra=array();
     $dat=json_decode(file_get_contents($ppath.$url), true);
-    analyze($dat, $ra);
+    analyzeC($dat, $ra);
     $content.='<form action="tools/adminer.php" method="post">';
     foreach($ra as $item){
         $path=$item[0];
