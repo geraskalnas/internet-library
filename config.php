@@ -16,7 +16,10 @@ switch ($_SERVER["SCRIPT_NAME"]) {
 		$CURRENT_PAGE = "Index";
 		$PAGE_TITLE = "Library System";
 }
-//$active
+
+$ppath="c/";
+$cfile="remotemysql.json";
+$ra=array();
 $DBhost='remotemysql.com';
 $DBusername='Y0E7ho32OA';
 $DBpassword='EtWs4O2BeQ';
