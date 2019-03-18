@@ -10,7 +10,6 @@ if(($lu->get_type())!="admin") {
     die();
 }
 
-$ra=array();
 function analyze($dat, &$ra, $s="", $i=true){
     foreach($dat as $key=>$val){
         if(!is_array($val)){
@@ -32,6 +31,7 @@ foreach(scandir($ppath) as $file){
 }
 
 foreach($l as $url){
+    $ra=array();
     $dat=json_decode(file_get_contents($ppath.$url), true);
     analyze($dat, $ra);
     $content.='<form action="tools/adminer.php" method="post">';
