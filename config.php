@@ -1,5 +1,5 @@
 <?php
-$include "classes.php";
+require_once("classes.php");
 switch ($_SERVER["SCRIPT_NAME"]) {
 	case "/library/admin.php":
 		$CURRENT_PAGE = "admin"; 
