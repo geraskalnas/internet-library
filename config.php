@@ -23,7 +23,7 @@ $cfile="remotemysql.json";
 $ra=array();
 $dat=json_decode(file_get_contents($ppath.$cfile), true);
 analyzeC($dat, $ra);
-echo "Debug ".vardump($ra);
+echo "Debug ".printr($ra);
 $db = new mysqli($ra["auth"]["server"], $ra["auth"]["username"], $ra["auth"]["password"], $ra["auth"]["db"]);
 if ($db->connect_errno > 0) {
     die('Unable to connect to database [' . $db->connect_error . ']');
