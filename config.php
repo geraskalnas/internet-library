@@ -1,5 +1,4 @@
 <?php
-require_once("classes.php");
 switch ($_SERVER["SCRIPT_NAME"]) {
 	case "/library/admin.php":
 		$CURRENT_PAGE = "admin"; 
@@ -20,11 +19,8 @@ switch ($_SERVER["SCRIPT_NAME"]) {
 
 $ppath="c/";
 $cfile="remotemysql.json";
-$ra=array();
 $dat=json_decode(file_get_contents($ppath.$cfile), true);
-analyzeC($dat, $ra);
-echo "Debug ".printr($ra);
-$db = new mysqli($ra["auth"]["server"], $ra["auth"]["username"], $ra["auth"]["password"], $ra["auth"]["db"]);
+$db = new mysqli($dat["auth"]["server"], $dat["auth"]["username"], $dat["auth"]["password"], $dat["auth"]["db"]);
 if ($db->connect_errno > 0) {
     die('Unable to connect to database [' . $db->connect_error . ']');
 }
