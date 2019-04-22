@@ -1,0 +1,3 @@
+# phpProjectTemplate
+
+## CSS directory

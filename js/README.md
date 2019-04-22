@@ -1,0 +1,3 @@
+# phpProjectTemplate
+
+## JS directory
