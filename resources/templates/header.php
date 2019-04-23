@@ -1,19 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
  
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Simple Site</title>
+    <title><?php echo $title; ?></title>
+    <link rel="stylesheet" href="css/index.css">
 </head>
- 
 <body>
-<div id="header">
-    <h1>Simple Site</h1>
-    <ul class="nav global">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Articles</a></li>
-        <li><a href="#">Portfolio</a></li>
-    </ul>
- 
+<div class="topnav">
+	<div>
+		<a class="active" href="index.php">Pradžia</a>
+		<a href="classes.php?test=1">Testing</a>
+		<a href="login.php">Prisijungti</a>
+		<a href="adminerC.php">Adminer</a>
+	</div>
+	<div>
+		<p><?php echo $username; ?></p>
+	</div>
 </div>
