@@ -1,8 +1,5 @@
-<!-- Homepage content -->
 <h2>Home Page</h2>
- 
 <?php
- 
     $sql = "SELECT name, author, imgPath, id FROM books WHERE blocked=0 ORDER BY id desc LIMIT ".$p*$sep.", $sep;";
 	if (!$result = $db->query($sql)) {
 		die('There was an error running the query [' . $db->error . ']');
@@ -14,7 +11,4 @@
     	echo '<img src="'.$row["imgPath"].'" style="width: 100%;height: auto;">';
 		echo '</div>';
 	}
- 
-    echo $setInIndexDotPhp;
- 
 ?>
