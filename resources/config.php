@@ -26,7 +26,7 @@ $id=$luser->getIdByLoggedIP(@getIP());
 $username="guest";
 if($id!=0){
     $luser->loadById($id);
-    $name=$lu->get_name();  
+    $name=$luser->get_name();
 }
 defined("USERNAME")
 	or define("USERNAME", $username);
