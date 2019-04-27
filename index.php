@@ -4,10 +4,7 @@
     
     $action=isset($_GET["action"])?$_GET["action"]:"home";
     
-    $variables = array(
-        'db' => $db,
-        'username' => USERNAME
-    );
+    $variables = array();
     
     switch($action){
     	case "home":
