@@ -37,4 +37,9 @@ if($id!=0){
 }
 
 $db->set_charset("utf8");
+
+$sql= "INSERT INTO `track` (`datetime`, `ip`, `url`) VALUES (CURRENT_TIME(), '" . @getIP() . "', NULL)";
+if (!$result = $db->query($sql)) {
+    die('There was an error running the query [' . $this->db->error . ']');
+}
 ?>
