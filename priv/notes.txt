@@ -1,0 +1,31 @@
+<?php
+
+//generuoja url adresus
+
+function UrlGeneratorius($urlIkiFailo, $objektas='', $veiksmas='', $id=-1){
+	$url=$urlIkiFailo;//						127.0.0.1/tarpininkas.php
+	if($objektas!=''){
+		$url .= '?objektas=' . $objektas;//		127.0.0.1/tarpininkas.php?objektas=skaitytojai
+		if($veiksmas!=''){
+			$url .= '&veiksmas=' . $veiksmas;//	127.0.0.1/tarpininkas.php?objektas=skaitytojai&veiksmas=rodyti
+			if($id>=0){
+				$url .= '&indeksas=' . $id;//	127.0.0.1/tarpininkas.php?objektas=skaitytojai&veiksmas=redaguoti&id=0
+			}
+		}
+	}
+	return $url;
+}
+
+Liked w3schools templates:
+Nature Portfolio
+Clothing Store
+Food Blog Template
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+https://colorlib.com/wp/free-bootstrap-4-website-templates/
+https://colorlib.com/shapely/#
+
+https://www.w3schools.com/colors/colors_names.asp
+https://designshack.net/articles/trends/best-website-color-schemes/
